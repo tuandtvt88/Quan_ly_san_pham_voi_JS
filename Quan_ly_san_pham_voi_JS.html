@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<button onclick="showList()">List</button>
+<button onclick="showFormAdd()">Add</button>
+<div id="disp"></div>
+<script>
+    let listProduct = ['Ip15','S23','Note9'];
+
+    function showList(){
+        let str = '<h2>Danh sách sản phẩm</h2>';
+        str += `<p>Số lượng sản phẩm: ${listProduct.length}</p>`;
+        for (let i = 0; i < listProduct.length; i++) {
+            str += `<h3>${listProduct[i]}
+                 <button onclick="edit(${i})">Edit</button>
+                 <button onclick="deleteProduct(${i})">Delete</button>
+                 </h3>`;
+        }
+        document.getElementById('disp').innerHTML = str;
+    }
+
+    function showFormAdd() {
+        let str = '<input id="inp"><button onclick="add()">Create</button>';
+        document.getElementById('disp').innerHTML = str;
+    }
+
+    function add(){
+        listProduct.push(document.getElementById('inp').value);
+        showList();
+    }
+
+    function edit(index){
+        let str = `<input id="inp" value="${listProduct[index]}"><button onclick="save(${index})">Save</button>`;
+        document.getElementById('disp').innerHTML = str;
+    }
+
+    function save(index){
+        listProduct[index] = document.getElementById('inp').value;
+        showList();
+    }
+
+    function deleteProduct(index){
+        listProduct.splice(index, 1);
+        showList();
+    }
+
+    showList(); // Display the list at the start
+</script>
+</body>
+</html>
